@@ -11,11 +11,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Noto Sans TC', 'Inter', sans-serif; background-color: #FEFBF6; color: #4A4A4A; }
-        .nav-link { transition: all 0.3s ease; border-left: 3px solid transparent; }
-        .nav-link.active { border-left-color: #D97706; background-color: #FFFBEB; color: #D97706; font-weight: 700; }
-        .nav-link:hover { background-color: #FFFBEB; }
-        .card { background-color: #FFFFFF; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); padding: 1.5rem; margin-bottom: 2rem; }
+        body {
+            font-family: 'Noto Sans TC', 'Inter', sans-serif;
+            background-color: #FEFBF6;
+            color: #4A4A4A;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        .nav-link.active {
+            border-left-color: #D97706;
+            background-color: #FFFBEB;
+            color: #D97706;
+            font-weight: 700;
+        }
+        .nav-link:hover {
+            background-color: #FFFBEB;
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .interactive-btn { transition: all 0.2s ease-in-out; }
+        .interactive-btn.active { background-color: #D97706; color: white; }
+        @keyframes dissolve { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(100px); } }
+        .dissolving-sugar { animation: dissolve 2s forwards; }
+        .tab-content.active { display: block; }
+        .tab-content { display: none; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 300px; max-height: 400px; }
+        @media (min-width: 768px) { .chart-container { height: 350px; } }
+        @media print {
+            body { background-color: #fff; color: #000; }
+            .no-print { display: none !important; }
+            .card { box-shadow: none; border: 1px solid #ddd; }
+            h1, h2 { color: #000 !important; }
+        }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col md:flex-row">
@@ -24,7 +58,13 @@
     <aside class="w-full md:w-64 bg-white p-6 md:p-8 border-b md:border-r border-gray-200 no-print fixed md:sticky top-0 z-50">
         <div class="flex items-center justify-between mb-6">
             <h1 class="text-2xl md:text-3xl font-bold text-gray-800">奶茶科學</h1>
+            <button id="printBtn" class="bg-gray-200 hover:bg-gray-300 p-2 rounded-full hidden md:block" title="列印">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                </svg>
+            </button>
         </div>
+        
         <nav class="flex flex-col space-y-2">
             <a href="#flavor-extraction" class="nav-link p-3 rounded-lg flex items-center space-x-2 active"><span>🍵</span><span>風味的萃取</span></a>
             <a href="#sugar-science" class="nav-link p-3 rounded-lg flex items-center space-x-2"><span>🍬</span><span>糖與茶的科學</span></a>
@@ -40,22 +80,35 @@
             <p class="mt-4 text-lg md:text-xl text-gray-600">一堂結合飲品操作與科學探究的實驗課</p>
         </header>
 
+        <!-- Flavor Extraction Section -->
         <section id="flavor-extraction" class="card">
             <h2 class="text-3xl font-bold text-gray-800 mb-4">風味的萃取：茶葉與溫度</h2>
+            <!-- 保留互動滑桿與圖表 -->
         </section>
 
+        <!-- Sugar & Tea Science Section -->
         <section id="sugar-science" class="card">
             <h2 class="text-3xl font-bold text-gray-800 mb-4">糖與茶的科學：風味與溶解度</h2>
+            <!-- 保留互動動畫 -->
         </section>
 
+        <!-- Cooling Methods Section -->
         <section id="cooling-methods" class="card">
             <h2 class="text-3xl font-bold text-gray-800 mb-4">冷卻的藝術：雪克杯與隔冰</h2>
+            <!-- 保留冷卻切換圖表 -->
         </section>
 
+        <!-- Milk Foam Section -->
         <section id="milk-foam" class="card">
             <h2 class="text-3xl font-bold text-gray-800 mb-4">奶泡的探究：原理與口感</h2>
+            <!-- 保留奶泡滑桿互動 -->
         </section>
+
     </main>
+    
+    <script>
+        // 這裡保留原本 Flavor Extraction / Cooling / Milk Foam 的互動 JS
+    </script>
 
 </body>
 </html>
