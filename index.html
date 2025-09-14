@@ -36,25 +36,67 @@
             padding: 1.5rem;
             margin-bottom: 2rem;
         }
-        .interactive-btn { transition: all 0.2s ease-in-out; }
-        .interactive-btn.active { background-color: #D97706; color: white; }
-        @keyframes dissolve { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(100px); } }
-        .dissolving-sugar { animation: dissolve 2s forwards; }
-        .tab-content.active { display: block; }
-        .tab-content { display: none; }
-        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 300px; max-height: 400px; }
-        @media (min-width: 768px) { .chart-container { height: 350px; } }
+        .interactive-btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .interactive-btn.active {
+            background-color: #D97706;
+            color: white;
+        }
+        @keyframes dissolve {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(100px); }
+        }
+        .dissolving-sugar {
+            animation: dissolve 2s forwards;
+        }
+        .gemini-message {
+            white-space: pre-wrap;
+            background-color: #F3F4F6;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .tab-content {
+            display: none;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
         @media print {
-            body { background-color: #fff; color: #000; }
-            .no-print { display: none !important; }
-            .card { box-shadow: none; border: 1px solid #ddd; }
-            h1, h2 { color: #000 !important; }
+            body {
+                background-color: #fff;
+                color: #000;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+            h1, h2 {
+                color: #000 !important;
+            }
         }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col md:flex-row">
 
-    <!-- Sidebar Navigation -->
     <aside class="w-full md:w-64 bg-white p-6 md:p-8 border-b md:border-r border-gray-200 no-print fixed md:sticky top-0 z-50">
         <div class="flex items-center justify-between mb-6">
             <h1 class="text-2xl md:text-3xl font-bold text-gray-800">奶茶科學</h1>
@@ -66,49 +108,285 @@
         </div>
         
         <nav class="flex flex-col space-y-2">
-            <a href="#flavor-extraction" class="nav-link p-3 rounded-lg flex items-center space-x-2 active"><span>🍵</span><span>風味的萃取</span></a>
-            <a href="#sugar-science" class="nav-link p-3 rounded-lg flex items-center space-x-2"><span>🍬</span><span>糖與茶的科學</span></a>
-            <a href="#cooling-methods" class="nav-link p-3 rounded-lg flex items-center space-x-2"><span>🧊</span><span>冷卻的藝術</span></a>
-            <a href="#milk-foam" class="nav-link p-3 rounded-lg flex items-center space-x-2"><span>🥛</span><span>奶泡的探究</span></a>
+            <a href="#flavor-extraction" class="nav-link p-3 rounded-lg flex items-center space-x-2 active">
+                <span>🍵</span>
+                <span>風味的萃取</span>
+            </a>
+            <a href="#sugar-science" class="nav-link p-3 rounded-lg flex items-center space-x-2">
+                <span>🍬</span>
+                <span>糖與茶的科學</span>
+            </a>
+            <a href="#cooling-methods" class="nav-link p-3 rounded-lg flex items-center space-x-2">
+                <span>🧊</span>
+                <span>冷卻的藝術</span>
+            </a>
+            <a href="#milk-foam" class="nav-link p-3 rounded-lg flex items-center space-x-2">
+                <span>🥛</span>
+                <span>奶泡的探究</span>
+            </a>
         </nav>
     </aside>
 
-    <!-- Main Content -->
     <main class="flex-1 p-6 md:p-12 mt-20 md:mt-0">
         <header class="mb-10 text-center md:text-left">
             <h1 class="text-4xl md:text-5xl font-bold text-gray-900">漂浮奶茶的科學探究</h1>
             <p class="mt-4 text-lg md:text-xl text-gray-600">一堂結合飲品操作與科學探究的實驗課</p>
         </header>
 
-        <!-- Flavor Extraction Section -->
         <section id="flavor-extraction" class="card">
             <h2 class="text-3xl font-bold text-gray-800 mb-4">風味的萃取：茶葉與溫度</h2>
-            <!-- 保留互動滑桿與圖表 -->
+            <p class="mb-6 text-gray-600">茶葉中的風味物質 <strong class="text-orange-600">(flavor compounds)</strong> 在不同溫度下溶出速度不同。高溫能快速釋放香氣 <strong class="text-orange-600">(aroma)</strong>，但也可能帶來苦澀。透過調整溫度，我們可以控制茶湯的風味平衡 <strong class="text-orange-600">(flavor balance)</strong>。</p>
+            <div class="bg-gray-100 p-6 rounded-xl">
+                <p class="text-center font-bold mb-4">沖泡溫度 <strong class="text-orange-600">(Brewing Temperature)</strong>: <span id="tempValue">90°C</span></p>
+                <input type="range" id="tempSlider" min="70" max="100" value="90" class="w-full h-2 bg-yellow-100 rounded-lg appearance-none cursor-pointer">
+            </div>
+            <div class="chart-container mt-8">
+                <canvas id="flavorChart"></canvas>
+            </div>
+            <p class="mt-6 text-gray-600 font-medium" id="flavor-chart-desc">
+                <strong>90°C:</strong> 在這個溫度下，茶湯的香氣與風味達到良好平衡。
+            </p>
         </section>
 
-        <!-- Sugar & Tea Science Section -->
         <section id="sugar-science" class="card">
             <h2 class="text-3xl font-bold text-gray-800 mb-4">糖與茶的科學：風味與溶解度</h2>
-            <!-- 保留互動動畫 -->
+            <p class="mb-6 text-gray-600">選擇正確的糖和正確的時機加入，是影響奶茶風味與口感 <strong class="text-orange-600">(texture)</strong> 的重要步驟。在這裡，我們將探究黃砂糖與茶葉的搭配，以及溫度對糖溶解度 <strong class="text-orange-600">(solubility)</strong> 的影響。</p>
+            
+            <div class="flex flex-col md:flex-row gap-6 mb-8">
+                <div class="flex-1 bg-gray-100 p-6 rounded-xl text-center">
+                    <p class="font-bold mb-2 text-gray-700">趁熱加糖：為什麼？ <strong class="text-orange-600">(Why add sugar when it's hot?)</strong></p>
+                    <div class="relative h-40 flex items-center justify-center overflow-hidden">
+                        <div class="w-16 h-16 bg-yellow-400 rounded-full absolute bottom-4 dissolving-sugar" id="sugarCube"></div>
+                        <div class="w-full h-full bg-blue-500 rounded-xl bg-opacity-30 absolute"></div>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-500">溫度越高，糖的溶解度越大，可以更快且更完全地溶解 <strong class="text-orange-600">(dissolve)</strong>。</p>
+                </div>
+                <div class="flex-1 bg-gray-100 p-6 rounded-xl">
+                    <p class="font-bold mb-4 text-center text-gray-700">茶葉與糖的搭配 <strong class="text-orange-600">(Tea and Sugar Pairing)</strong></p>
+                    <p class="text-gray-600"><strong>阿薩姆紅茶 (Assam Black Tea)</strong> 以其濃郁醇厚的風味 <strong class="text-orange-600">(full-bodied flavor)</strong> 聞名，非常適合搭配黃砂糖 <strong class="text-orange-600">(brown sugar)</strong>。黃砂糖中的焦糖 <strong class="text-orange-600">(caramel)</strong> 和糖蜜 <strong class="text-orange-600">(molasses)</strong> 香氣與阿薩姆的麥芽香完美融合，使奶茶風味更有層次。</p>
+                </div>
+            </div>
         </section>
-
-        <!-- Cooling Methods Section -->
+        
         <section id="cooling-methods" class="card">
             <h2 class="text-3xl font-bold text-gray-800 mb-4">冷卻的藝術：雪克杯與隔冰</h2>
-            <!-- 保留冷卻切換圖表 -->
+            <p class="mb-6 text-gray-600">製作冰奶茶時，快速冷卻 <strong class="text-orange-600">(rapid cooling)</strong> 是為了鎖住茶湯風味，避免稀釋 <strong class="text-orange-600">(dilution)</strong>。雪克杯搖盪 <strong class="text-orange-600">(shaking)</strong> 與隔冰冷卻 <strong class="text-orange-600">(ice bath)</strong> 是兩種常見方法，各有其優缺點。</p>
+            <div class="flex space-x-2 md:space-x-4 mb-6 no-print">
+                <button id="shakerBtn" class="interactive-btn flex-1 py-2 px-4 rounded-full text-center text-sm md:text-base border border-gray-300 active">雪克杯搖盪 <strong class="text-white">(Shaker Method)</strong></button>
+                <button id="iceBathBtn" class="interactive-btn flex-1 py-2 px-4 rounded-full text-center text-sm md:text-base border border-gray-300">隔冰冷卻 <strong class="text-orange-600">(Ice Bath Method)</strong></button>
+            </div>
+            
+            <div id="shakerContent" class="tab-content active">
+                <div class="chart-container">
+                    <canvas id="coolingChart"></canvas>
+                </div>
+                <p class="mt-6 text-gray-600">
+                    <strong>原理 (Principle):</strong> 雪克杯搖盪透過最大化茶液與冰塊的接觸面積 <strong class="text-orange-600">(contact area)</strong>，達到最快速的冷卻效果。<br>
+                    <strong>優點 (Pros):</strong> 快速降溫，同時產生細緻泡沫，使口感更佳。<br>
+                    <strong>缺點 (Cons):</strong> 可能因冰塊融化而略微稀釋 <strong class="text-orange-600">(dilute)</strong> 茶湯。
+                </p>
+            </div>
+            
+            <div id="iceBathContent" class="tab-content">
+                <div class="chart-container">
+                    <canvas id="coolingChart2"></canvas>
+                </div>
+                <p class="mt-6 text-gray-600">
+                    <strong>原理 (Principle):</strong> 將裝有茶液的容器放入冰水中，利用熱傳導 <strong class="text-orange-600">(heat conduction)</strong> 原理將熱量從熱茶傳遞到冰水。<br>
+                    <strong>優點 (Pros):</strong> 幾乎不稀釋茶湯，能保持原始風味濃度。<br>
+                    <strong>缺點 (Cons):</strong> 冷卻速度較慢，且無法產生泡沫。
+                </p>
+            </div>
         </section>
 
-        <!-- Milk Foam Section -->
         <section id="milk-foam" class="card">
             <h2 class="text-3xl font-bold text-gray-800 mb-4">奶泡的探究：原理與口感</h2>
-            <!-- 保留奶泡滑桿互動 -->
+            <p class="mb-6 text-gray-600">奶泡的成功與否取決於牛奶的種類、溫度和脂肪 <strong class="text-orange-600">(fat)</strong> 含量。這些因素會影響奶泡的穩定性 <strong class="text-orange-600">(stability)</strong> 和口感。</p>
+            
+            <div class="flex flex-col md:flex-row gap-6 mb-8">
+                <div class="flex-1 bg-gray-100 p-6 rounded-xl">
+                    <p class="font-bold mb-2 text-gray-700">牛奶溫度對奶泡的影響 <strong class="text-orange-600">(Effect of Temperature)</strong></p>
+                    <p class="text-sm text-gray-500 mb-4">溫度: <span id="foamTempValue">60°C</span></p>
+                    <input type="range" id="foamTempSlider" min="40" max="80" value="60" class="w-full h-2 bg-yellow-100 rounded-lg appearance-none cursor-pointer">
+                    <p class="mt-4 text-sm text-gray-600" id="foam-temp-desc">在 60-70°C 之間，牛奶中的蛋白質 <strong class="text-orange-600">(proteins)</strong> 最活躍，能形成穩定且綿密的奶泡。</p>
+                </div>
+                <div class="flex-1 bg-gray-100 p-6 rounded-xl">
+                    <p class="font-bold mb-2 text-gray-700">脂肪含量與口感 <strong class="text-orange-600">(Fat Content and Texture)</strong></p>
+                    <p class="text-sm text-gray-500 mb-4">脂肪含量: <span id="fatValue">3.5% (全脂)</span></p>
+                    <input type="range" id="fatSlider" min="0" max="100" value="70" class="w-full h-2 bg-yellow-100 rounded-lg appearance-none cursor-pointer">
+                    <p class="mt-4 text-sm text-gray-600" id="foam-fat-desc"><strong>全脂牛奶 (Whole milk)</strong> (脂肪含量高) 打出的奶泡口感更滑順，而<strong>低脂牛奶 (low-fat milk)</strong> 則較輕薄。</p>
+                </div>
+            </div>
         </section>
-
+        
     </main>
     
     <script>
-        // 這裡保留原本 Flavor Extraction / Cooling / Milk Foam 的互動 JS
-    </script>
+        // Flavor Extraction Chart
+        const tempSlider = document.getElementById('tempSlider');
+        const tempValueSpan = document.getElementById('tempValue');
+        const flavorChartDesc = document.getElementById('flavor-chart-desc');
+        const ctx = document.getElementById('flavorChart').getContext('2d');
+        const flavorData = {
+            labels: ['香氣', '苦澀', '風味'],
+            datasets: [{
+                label: '風味評分 (1-10)',
+                data: [8, 3, 9],
+                backgroundColor: ['#4FC3F7', '#EF5350', '#66BB6A'],
+                borderColor: ['#2196F3', '#D32F2F', '#388E3C'],
+                borderWidth: 1
+            }]
+        };
+        let flavorChart = new Chart(ctx, {
+            type: 'bar',
+            data: flavorData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true, max: 10 } },
+                plugins: { legend: { display: false } }
+            }
+        });
 
+        tempSlider.addEventListener('input', () => {
+            const temp = parseInt(tempSlider.value);
+            tempValueSpan.textContent = `${temp}°C`;
+            let newData;
+            let description;
+            if (temp <= 75) {
+                newData = [5, 2, 6];
+                description = "<strong>70°C:</strong> 低溫沖泡能減少苦澀，但茶湯風味與香氣較淡。";
+            } else if (temp <= 85) {
+                newData = [7, 4, 8];
+                description = "<strong>80°C:</strong> 風味較溫和，適合清爽型茶飲。";
+            } else if (temp <= 95) {
+                newData = [9, 3, 9];
+                description = "<strong>90°C:</strong> 在這個溫度下，茶湯的香氣與風味達到良好平衡。";
+            } else {
+                newData = [9, 7, 7];
+                description = "<strong>100°C:</strong> 高溫能充分萃取，但茶湯可能帶有明顯的苦澀味。";
+            }
+            flavorChart.data.datasets[0].data = newData;
+            flavorChartDesc.innerHTML = description;
+            flavorChart.update();
+        });
+        
+        // Cooling Methods Chart
+        const shakerBtn = document.getElementById('shakerBtn');
+        const iceBathBtn = document.getElementById('iceBathBtn');
+        const shakerContent = document.getElementById('shakerContent');
+        const iceBathContent = document.getElementById('iceBathContent');
+        const coolingCtx = document.getElementById('coolingChart').getContext('2d');
+        const coolingCtx2 = document.getElementById('coolingChart2').getContext('2d');
+
+        const coolingOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true, max: 100 } },
+            plugins: { legend: { display: false } }
+        };
+
+        let coolingChart = new Chart(coolingCtx, {
+            type: 'bar',
+            data: {
+                labels: ['冷卻速度', '風味濃度'],
+                datasets: [{ data: [90, 80], backgroundColor: ['#039BE5', '#26A69A'] }]
+            },
+            options: coolingOptions
+        });
+
+        let coolingChart2 = new Chart(coolingCtx2, {
+            type: 'bar',
+            data: {
+                labels: ['冷卻速度', '風味濃度'],
+                datasets: [{ data: [60, 95], backgroundColor: ['#039BE5', '#26A69A'] }]
+            },
+            options: coolingOptions
+        });
+
+        shakerBtn.addEventListener('click', () => {
+            shakerBtn.classList.add('active');
+            shakerBtn.querySelector('strong').classList.replace('text-orange-600', 'text-white');
+            iceBathBtn.classList.remove('active');
+            iceBathBtn.querySelector('strong').classList.replace('text-white', 'text-orange-600');
+            shakerContent.classList.add('active');
+            iceBathContent.classList.remove('active');
+        });
+
+        iceBathBtn.addEventListener('click', () => {
+            iceBathBtn.classList.add('active');
+            iceBathBtn.querySelector('strong').classList.replace('text-orange-600', 'text-white');
+            shakerBtn.classList.remove('active');
+            shakerBtn.querySelector('strong').classList.replace('text-white', 'text-orange-600');
+            iceBathContent.classList.add('active');
+            shakerContent.classList.remove('active');
+        });
+        
+        // Milk Foam Section
+        const foamTempSlider = document.getElementById('foamTempSlider');
+        const foamTempValue = document.getElementById('foamTempValue');
+        const foamTempDesc = document.getElementById('foam-temp-desc');
+        
+        foamTempSlider.addEventListener('input', () => {
+            const temp = parseInt(foamTempSlider.value);
+            foamTempValue.textContent = `${temp}°C`;
+            let description = '';
+            if (temp < 55) {
+                description = '低溫牛奶（40-50°C）難以打出奶泡。';
+            } else if (temp <= 70) {
+                description = '在 60-70°C 之間，牛奶中的蛋白質 <strong class="text-orange-600">(proteins)</strong> 最活躍，能形成穩定且綿密的奶泡。';
+            } else {
+                description = '過熱的牛奶（70°C以上）會使蛋白質變性 <strong class="text-orange-600">(denature)</strong>，失去穩定氣泡的能力。';
+            }
+            foamTempDesc.innerHTML = description;
+        });
+
+        const fatSlider = document.getElementById('fatSlider');
+        const fatValue = document.getElementById('fatValue');
+        const foamFatDesc = document.getElementById('foam-fat-desc');
+
+        fatSlider.addEventListener('input', () => {
+            const fat = parseInt(fatSlider.value);
+            if (fat > 50) {
+                fatValue.textContent = '3.5% (全脂)';
+                foamFatDesc.innerHTML = '<strong>全脂牛奶 (Whole milk)</strong> (脂肪含量高) 打出的奶泡口感更滑順，而<strong>低脂牛奶 (low-fat milk)</strong> 則較輕薄。';
+            } else {
+                fatValue.textContent = '0.5% (低脂)';
+                foamFatDesc.innerHTML = '<strong>低脂牛奶 (low-fat milk)</strong> (脂肪含量低) 打出的奶泡較輕薄，但穩定性較差。';
+            }
+        });
+        
+        // Responsive Navigation & Scroll Spy
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const onScroll = () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.href.includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', onScroll);
+
+        // Print button logic
+        document.getElementById('printBtn').addEventListener('click', () => {
+            window.print();
+        });
+    </script>
 </body>
 </html>
